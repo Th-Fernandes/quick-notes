@@ -11,7 +11,8 @@ export function useGetInput() {
   const inputs = React.useRef({});
 
   function handleGetInput({key, value}:Input) {
-    inputs.current = {...inputs, [key]: value};
+    inputs.current = {...inputs.current, [key]: value};
+    
   }
 
   return {
