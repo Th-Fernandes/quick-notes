@@ -8,11 +8,11 @@ interface Input {
 }
 
 export function useGetInput() {
-  const inputs = React.useRef({});
+  const inputs = React.useRef<any>({});
 
   function handleGetInput({key, value}:Input) {
     inputs.current = {...inputs.current, [key]: value};
-    
+
   }
 
   return {
