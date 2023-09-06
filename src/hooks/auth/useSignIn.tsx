@@ -18,6 +18,7 @@ export function useSignIn() {
   async function signIn({ email, password }:Credentials) {
     const signIn = signInWithEmailAndPassword(auth, email, password);
     catchSignErrorOn(signIn);
+    localStorage.setItem('accessToken', 'abc123')
   }
 
   function catchSignErrorOn(sign:Promise<UserCredential>) {
