@@ -1,5 +1,5 @@
 import { auth } from "@/lib/firebase/auth";
-import { UserCredential, signInWithEmailAndPassword } from "firebase/auth";
+import { User, UserCredential, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 
 interface Credentials {
@@ -9,6 +9,7 @@ interface Credentials {
 
 
 export function useSignIn() {
+  const [signedInUser, setSignedInUser] = React.useState<User | null>(null);
   const [error, setError] = React.useState({
     exists: false,
     message: null
@@ -21,14 +22,22 @@ export function useSignIn() {
 
   function catchSignErrorOn(sign:Promise<UserCredential>) {
     sign.catch(error => {
-      setError(() => {
-        return { exists: true, message: error.message }
-      })
+      setError({ exists: true, message: error.message })
     })
+  }
+
+  function getSignedInUser() {
+    if(!signedInUser) 
+      onAuthStateChanged(auth, user => {
+        setSignedInUser(user)
+      })
+  
+    return { signedInUser };
   }
 
   return {
     error,
-    signIn
+    signIn,
+    getSignedInUser
   }
 }
