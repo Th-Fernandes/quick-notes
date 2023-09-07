@@ -1,11 +1,13 @@
 "use client";
 
 import { useSignIn } from "@/hooks/auth/useSignIn";
+import { useSignOut } from "@/hooks/auth/useSignOut";
 import Image from "next/image";
 
 export function Header() {
   const { getSignedInUser } = useSignIn();
   const { signedInUser } = getSignedInUser();
+  const { signOut } = useSignOut();
 
   return (
     <header className="flex flex-col items-center sm:flex-row sm:justify-between gap-4 max-w-4xl px-4 mx-auto pt-3">
@@ -14,7 +16,10 @@ export function Header() {
       <div className="flex gap-3">
         <div>
           <span className="block mb-2">{signedInUser?.displayName}</span>
-          <button className="border border-red-300 text-red-300 py-1 px-2 rounded-md hover:bg-red-300 hover:text-black transition-colors">
+          <button 
+            onClick={signOut}
+            className="border border-red-300 text-red-300 py-1 px-2 rounded-md hover:bg-red-300 hover:text-black transition-colors"
+          >
             Desconectar-se
           </button>
         </div>
