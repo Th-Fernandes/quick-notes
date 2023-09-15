@@ -1,4 +1,5 @@
 import { auth } from "@/lib/firebase/auth";
+import { userTokenOperations } from "@/utils/userTokenOperations";
 import { User, UserCredential, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 
@@ -18,7 +19,7 @@ export function useSignIn() {
   async function signIn({ email, password }:Credentials) {
     const signIn = signInWithEmailAndPassword(auth, email, password);
     catchSignErrorOn(signIn);
-    localStorage.setItem('accessToken', 'abc123')
+    userTokenOperations.storage('abc123');
   }
 
   function catchSignErrorOn(sign:Promise<UserCredential>) {

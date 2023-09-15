@@ -1,4 +1,5 @@
+import { userTokenOperations } from "./userTokenOperations"
+
 export function hasValidAccessToken(): boolean {
-  const accessToken = localStorage.getItem('accessToken')
-  return accessToken != null
+  return userTokenOperations.get() != null
 }
