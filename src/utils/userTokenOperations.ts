@@ -1,13 +1,13 @@
 export const userTokenOperations = {
   get() {
-    localStorage.getItem('accessToken');
+    return localStorage.getItem('accessToken');
   },
 
   storage(token: string) {
-    localStorage.setItem('accessToken', token);
+    return localStorage.setItem('accessToken', token);
   },
 
   remove() {
-    localStorage.removeItem('accessToken');
+    return localStorage.removeItem('accessToken');
   }
 }
